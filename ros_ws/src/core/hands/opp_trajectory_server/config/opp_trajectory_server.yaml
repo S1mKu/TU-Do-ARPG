@@ -1,0 +1,11 @@
+visualize: false
+
+services:
+  advertise: opp_traj_control_command
+
+params:
+  n_points: 20
+  rate: 10
+  min_obs_history: 2
+  switch_distance: 6.0
+  ground_truth: true

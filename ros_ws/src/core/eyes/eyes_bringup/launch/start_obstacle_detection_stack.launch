@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ground_truth_localization" default="true"/>
+
+    <include file="$(find obstacle_detection_lidar)/launch/obstacle_detection_lidar_gym.launch" />
+    <include file="$(find obstacle_tracking)/launch/obstacle_tracking.launch" />
+
+    <group unless="$(arg ground_truth_localization)">
+        <include file="$(find eyes_bringup)/launch/amcl.launch" />
+    </group>
+</launch>

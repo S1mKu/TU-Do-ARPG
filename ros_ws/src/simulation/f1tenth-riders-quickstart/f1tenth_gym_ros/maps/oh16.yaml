@@ -1,0 +1,6 @@
+image: oh16.pgm
+resolution: 0.030000
+origin: [-5.610000, -1.320000, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

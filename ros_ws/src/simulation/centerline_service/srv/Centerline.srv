@@ -1,0 +1,6 @@
+---
+geometry_msgs/PolygonStamped centerline
+geometry_msgs/PolygonStamped roadside_inner
+geometry_msgs/PolygonStamped roadside_outer
+float32[] width
+float32[] velocity

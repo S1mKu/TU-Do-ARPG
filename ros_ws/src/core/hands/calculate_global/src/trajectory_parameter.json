@@ -1,0 +1,8 @@
+{
+    "mpc": {
+        "n_horizon": 20,
+        "t_step": 0.2,
+        "safety_distance": 0.2,
+        "max_iter": 100
+    }
+}

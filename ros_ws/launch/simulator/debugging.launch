@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="enable_rviz" default="true"/>
+  <arg name="head_to_head" default="false" />
+  <arg name="publish_odom_tf" default="true" /> <!-- there should be few exceptions for setting this to 'false' -->
+  <arg name="ground_truth_localization" default="true"/>
+
+  <arg name="ego_id" default="a1"/>
+  <arg name="opp_id" default="a2"/>
+
+  <!-- Launch eyes algorithms -->
+  <group ns="a1">
+    <node name="obstacle_detection_lidar" pkg="obstacle_detection_lidar" type="obstacle_detection_lidar_node" launch-prefix="xterm -e gdb -args">
+        <rosparam command="load" file="$(find obstacle_detection_lidar)/config/obstacle_detection_lidar_gym.yaml" />
+    </node>
+
+    
+    <!-- <node name="obstacle_tracking" 
+        pkg="obstacle_tracking" 
+        type="obstacle_tracking_node"
+        launch-prefix="xterm -e gdb -args">
+      <rosparam command="load" file="$(find obstacle_tracking)/config/obstacle_tracking.yml" />
+    </node> -->
+  </group>
+
+</launch>

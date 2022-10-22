@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="map_trajectory" default="Oschersleben"/>
+
+<!-- Launch trajectory service -->
+  <node pkg="optimal_trajectory_service" name="trajectory_server" type="trajectory_server.py" output="screen">
+    <param name="map" value="$(arg map_trajectory)" />
+  </node>
+
+</launch>

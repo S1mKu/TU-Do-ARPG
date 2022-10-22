@@ -1,0 +1,19 @@
+visualize: true
+
+topics:
+  subscribe:
+    map_topic: /map
+    scan_topic: /scan
+  publish:
+    final_filtered_scan_topic: /lidar_segments
+
+tf:
+  frames:
+    map_frame: /map
+    car_frame: /ego_racecar/base_link
+
+algorithms:
+  bgs:
+    threshold: 1
+  abp:
+    threshhold_distance: 1

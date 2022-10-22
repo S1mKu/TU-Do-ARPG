@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>eyes_bringup</name>
+  <version>0.0.0</version>
+  <description>The "eyes_bringup" package is a meta package that contains files for configuring, setting-up and launching specific components of the eyes group.</description>
+
+  <!-- Maintainer -->
+  <maintainer email="f110@ls12.cs.uni-dortmund.de">PG F1/10 (WS21/22)</maintainer>
+
+  <!-- License -->
+  <license>MIT</license>
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

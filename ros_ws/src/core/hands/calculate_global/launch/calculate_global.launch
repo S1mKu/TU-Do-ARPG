@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="enable_rviz" default="true"/>
+  <arg name="ego_id" default="a1"/>
+  <arg name="map_centerline" default="Oschersleben_map"/>
+  <arg name="map_gym_yaml" default="Oschersleben_map.yaml"/>
+  <arg name="map_map_server" default="Oschersleben_map_modified.yaml"/>
+  
+  <!-- Launch a map from the maps folder & map server-->
+  <arg name="map" default="$(find f1tenth_gym_ros)/maps/$(arg map_map_server)"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)"/>
+
+  <!-- Launch centerline service -->
+  <node pkg="centerline_service" name="centerline_server" type="centerline_server.py" output="screen">
+    <param name="map" value="$(arg map_centerline)" />
+  </node>
+
+  <node name="start_calculate" pkg="calculate_global" type="calculate_trajectory_node.py" output="screen"/>
+</launch>
+

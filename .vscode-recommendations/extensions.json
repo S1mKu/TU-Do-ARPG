@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        "ms-iot.vscode-ros",
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-german",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "mitaki28.vscode-clang",
+        "austin.code-gnu-global",
+        "ajshort.msg",
+        "smilerobotics.urdf"
+    ]
+}

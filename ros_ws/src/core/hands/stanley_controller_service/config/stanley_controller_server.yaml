@@ -1,0 +1,28 @@
+visualize: true
+
+topics:
+  publish:
+    viz_look_ahead_topic: rviz/look_ahead
+    viz_followed_path_topic: rviz/followed_path
+    cte_topic: eval/cte
+    yaw_delta_topic: eval/yaw_delta
+
+services:
+  advertise: stanley_controller_control_command
+
+params:
+  car_length: 0.31
+  max_look_ahead: 8.0
+  min_look_ahead: 1.5
+  desired_time_delta: 0.4
+  shift_front_point: 0.0
+  max_steering_angle: 0.0
+  e_k: 3
+  soft_k: 0.1
+  yaw_k: 1.0
+  max_steering_delta: 0.5
+
+tf:
+  frames:
+    map_frame: /map
+    car_frame: /base_link

@@ -1,0 +1,18 @@
+
+bags/
+
+data/*
+ros_ws/build/
+ros_ws/devel/
+ros_ws/src/CMakeLists.txt
+ros_ws/\.catkin_workspace
+ros_ws/src/**/cartographer_setup/logs/*
+.vscode/
+
+*.pyc
+*.to
+
+# doxygen output
+docs/
+.rosinstall
+ros_ws/logs

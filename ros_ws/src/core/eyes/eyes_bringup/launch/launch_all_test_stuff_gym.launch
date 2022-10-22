@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find eyes_bringup)/launch/fake_localization.launch" />
+  <include file="$(find f1tenth_gym_ros)/launch/gym_bridge_rviz.launch" />
+  <!-- <include file="$(find f1tenth_gym_agent)/launch/gym_agent.launch" /> -->
+</launch>

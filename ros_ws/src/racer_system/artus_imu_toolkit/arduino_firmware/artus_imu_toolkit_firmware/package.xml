@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>artus_imu_toolkit_firmware</name>
+  <version>0.0.0</version>
+  <description>
+    This package only contains the necessary firmware for arduino like microcontroller units to run an AHRS system
+    dedicated to this ROS1 Package.
+    In general because this package part contains only arduino IDE code this package part is ROS independent.
+    In case of using the provided magnetometer calibration firmware for Magnetometer Calibration an installation of
+    `Motion Cal` is recommended. Further information on how to use that kind of callibration software as well as on how
+    to install it can be found here :
+    https://learn.adafruit.com/adafruit-sensorlab-magnetometer-calibration?view=all and here https://www.pjrc.com/store/prop_shield.html
+    In case of accelerometer calibration an installation of Octave (or Matlab) is useful to easily solve the equation
+    by the least Square methode.
+  </description>
+
+  <url type="repository">https://gitlab.fachschaften.org/f1tenth-ws21-22/artus</url>
+  <url type="website">https://learn.adafruit.com/adafruit-sensorlab-magnetometer-calibration?view=all</url>
+  <url type="website">https://www.pjrc.com/store/prop_shield.html</url>
+  <url type="website">https://learn.sparkfun.com/tutorials/9dof-razor-imu-m0-hookup-guide</url>
+
+  <!-- Maintainer -->
+  <maintainer email="f110@ls12.cs.uni-dortmund.de">PG F1/10</maintainer>
+  <maintainer email="samanta.scharmacher@tu-dortmund.de">Samanta Scharmacher</maintainer>
+
+  <author >Samanta Scharmacher</author>
+
+  <!-- License -->
+  <license>MIT</license>
+  <license>GPLv3</license>
+
+  <!-- Dependencies -->
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

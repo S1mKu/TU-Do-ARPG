@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- <include file="$(find avoid_static_obstacles)/launch/avoid_static_obstacles.launch"/>
+    <include file="$(find wallfollowing5)/launch/autonomous_driving_physical.launch"/> -->
+
+</launch>

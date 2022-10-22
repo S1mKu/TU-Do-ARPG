@@ -1,0 +1,7 @@
+# Ignore virtualenv files
+venv/**/*
+ros_ws/build/*
+ros_ws/devel/*
+#ros_ws/src/simulation/gazebo/gazebo_telemtery/*
+ros_ws/src/racer_system/external_packages/zed-ros-wrapper/*
+ros_ws/src/simulation/f1tenth-*/pkg/*

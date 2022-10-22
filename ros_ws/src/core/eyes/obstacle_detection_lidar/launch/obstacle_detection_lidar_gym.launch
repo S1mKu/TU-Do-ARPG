@@ -1,0 +1,5 @@
+<launch>
+  <node name="obstacle_detection_lidar" pkg="obstacle_detection_lidar" type="obstacle_detection_lidar_node">
+    <rosparam command="load" file="$(find obstacle_detection_lidar)/config/obstacle_detection_lidar_gym.yaml" />
+  </node>
+</launch>

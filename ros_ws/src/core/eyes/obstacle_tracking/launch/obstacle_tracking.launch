@@ -1,0 +1,9 @@
+<launch>
+
+    <node name="obstacle_tracking" 
+        pkg="obstacle_tracking" 
+        type="obstacle_tracking_node">
+      <rosparam command="load" file="$(find obstacle_tracking)/config/obstacle_tracking.yml" />
+    </node>
+
+</launch>

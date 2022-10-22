@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="raceline_service" name="raceline_service" type="raceline_server.py" output="screen"/>
+
+  <!-- Launch control_command_handle service -->
+  <node name="control_command_handle" pkg="control_command_handle" type="control_command_handle_node" output="screen">
+    <rosparam command="load" file="$(find control_command_handle)/config/control_command_handle.yaml" />
+  </node>
+
+  <!-- Launch gap_follower_service service -->
+  <node pkg="opp_trajectory_service" name="opp_traj_service" type="opp_trajectory_server" output="screen">
+    <rosparam command="load" file="$(find opp_trajectory_service)/config/opp_trajectory_server.yaml" />
+  </node>
+
+  <!-- Launch pure_pursuit_service service -->
+  <node name="pure_pursuit_service" pkg="pure_pursuit_service" type="pure_pursuit_server" output="screen">
+    <rosparam command="load" file="$(find pure_pursuit_service)/config/pure_pursuit_server.yaml" />
+  </node>
+
+  <!-- Launch pure_pursuit_service service -->
+  <node name="stanley_controller_service" pkg="stanley_controller_service" type="stanley_controller_service" output="screen">
+    <rosparam command="load" file="$(find stanley_controller_service)/config/stanley_controller_server.yaml" />
+  </node>
+
+  <!-- Launch gap_follower_service service -->
+  <node pkg="gap_follower_service" name="gap_follower_service" type="gap_follower_service_server.py" output="screen">
+  </node>
+
+  <!-- Launch pid_distance_service service -->
+  <node pkg="pid_distance_service" name="pid_distance_service" type="pid_distance_service_node" output="screen">
+    <rosparam command="load" file="$(find pid_distance_service)/config/pid_distance_service.yaml" />
+  </node>
+
+    <!-- <include file="$(find time_optimal_mpc_python)/launch/start_mpc.launch"/> -->
+    
+</launch>

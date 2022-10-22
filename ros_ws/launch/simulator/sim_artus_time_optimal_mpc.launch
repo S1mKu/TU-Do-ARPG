@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="enable_rviz" default="true"/>
+  <arg name="head_to_head" default="false" />
+  <arg name="publish_odom_tf" default="true" /> <!-- there should be few exceptions for setting this to 'false' -->
+  <arg name="ground_truth_localization" default="true"/>
+
+  <arg name="ego_id" default="a1"/>
+  <arg name="opp_id" default="a2"/>
+
+  <arg name="map_centerline" default="Oschersleben_map"/>
+  <!-- Load not modified centerline with a lot of points for icp -->
+  <arg name="map_true_centerline" default="Oschersleben_map_centerline"/>
+  <!-- <arg name="map_gym_yaml" default="Oschersleben_map_obs.yaml"/> -->
+  <arg name="map_gym_yaml" default="Oschersleben_map.yaml"/>
+  <!-- <arg name="map_map_server" default="Oschersleben_map.yaml"/> -->
+  <arg name="map_map_server" default="Oschersleben_map_modified.yaml"/>
+
+  <!-- <arg name="map_centerline" default="oh16"/>
+  <arg name="map_gym_yaml" default="oh16.yaml"/>
+  <arg name="map_map_server" default="oh16.yaml"/> -->
+
+  <!-- Launch a map from the maps folder & map server-->
+  <arg name="map" default="$(find f1tenth_gym_ros)/maps/$(arg map_map_server)"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)"/>
+
+  <!-- Launch robot model-->
+  <include file="$(find f1tenth_gym_ros)/launch/racecar_model.launch"/>
+
+  <!-- Launch gym bridge node-->
+  <rosparam command="load" file="$(find f1tenth_gym_ros)/params.yaml"/>
+  <param name="map_path" value="$(arg map)"/>
+  <node pkg="f1tenth_gym_ros" name="gym_bridge" type="gym_bridge_bare.py" output="screen" required="true">
+    <param name="map_gym_yaml" value="$(arg map_gym_yaml)" />
+    <param name="ego_id" value="$(arg ego_id)" />
+    <param name="opp_id" value="$(arg opp_id)" />
+    <param name="head_to_head" value="$(arg head_to_head)" />
+  </node>
+
+  <!-- Launch centerline service -->
+  <node pkg="centerline_service" name="centerline_server" type="centerline_server.py" output="screen">
+    <param name="map" value="$(arg map_centerline)" />
+    <param name="map_centerline" value="$(arg map_true_centerline)" />
+  </node>
+
+  <!-- Launch rviz visualization-->
+  <group if="$(arg enable_rviz)">
+      <node type="rviz" name="rviz" pkg="rviz" args="-d $(find hands_bringup)/rviz/gym_config.rviz" />
+  </group>
+
+  <!-- Launch gym agent (/opp_racecar)-->
+  <node pkg="f1tenth_gym_agent" required="true" type="agent_bridge.py" name="gym_agent" output="screen">
+    <param name="opp_id" value="$(arg opp_id)" />
+    <param name="ego_id" value="$(arg ego_id)" />
+    <param name="ground_truth_localization" value="$(arg ground_truth_localization)" />
+    <param name="publish_odom_tf" value="$(arg publish_odom_tf)" />
+    <param name="init_delay" value="10" />
+  </node>
+
+  <!-- Launch eyes algorithms -->
+  <group ns="a1">
+    <param name="tf/frames/car_frame" value="ego_racecar/laser_model" />
+    <include file="$(find eyes_bringup)/launch/start_obstacle_detection_stack.launch" pass_all_args="true"/>
+
+    <!-- <param name="agent_id" value="a1" />
+    <param name="params/speed/speed_mod" value="0.1" />
+    <include file="$(find hands_bringup)/launch/start_obstacle_avoidance_submission_stack.launch" pass_all_args="true"/> -->
+
+    <include file="$(find hands_bringup)/launch/launch_time_opt_mpc.launch" pass_all_args="true"/>
+
+  </group>
+
+  <group ns="a2" if="$(arg head_to_head)">
+    <param name="tf/frames/car_frame" value="app_racecar/laser_model" />
+    <!-- <include file="$(find eyes_bringup)/launch/start_obstacle_detection_stack.launch" pass_all_args="true"/> -->
+
+    <!-- <param name="agent_id" value="a2" />
+    <param name="params/speed/speed_mod" value="0.1" />
+    <include file="$(find hands_bringup)/launch/start_obstacle_avoidance_submission_stack.launch" pass_all_args="true"/> -->
+
+    <!-- Launch hands algorithms -->
+    <include file="$(find hands_bringup)/launch/launch_hands_stack.launch" pass_all_args="true"/>
+  </group>
+  
+
+</launch>

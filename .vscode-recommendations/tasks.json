@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "prerun",
+            "type": "shell",
+            "command": "source ../ros_ws/devel/setup.bash && export ROS_MASTER_URI=http://localhost:11311/ "
+        },    
+        {
+            "label": "catkin_make_WITHOUT_gym",
+            "type": "shell",
+            "command": "catkin_make",
+            "options": {
+                "cwd": "${workspaceFolder}/ros_ws"
+            },
+            "args": [
+                "-DCATKIN_BLACKLIST_PACKAGES=f1tenth_gym_ros",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "-DCMAKE_CXX_STANDARD=14"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }, 
+        {
+            "label": "catkin_make_gym",
+            "type": "shell",
+            "command": "catkin_make",
+            "options": {
+                "cwd": "${workspaceFolder}/ros_ws"
+            },
+            "args": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DPYTHON_EXECUTABLE=/usr/bin/python3",
+                "-DPYTHON_INCLUDE_DIR=/usr/include/python3.6m",
+                "-DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

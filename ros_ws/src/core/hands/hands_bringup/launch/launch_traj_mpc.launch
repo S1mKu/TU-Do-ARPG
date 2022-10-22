@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find trajectory_following_mpc_python)/launch/launch_trajectory_mpc.launch"/>
+    
+</launch>

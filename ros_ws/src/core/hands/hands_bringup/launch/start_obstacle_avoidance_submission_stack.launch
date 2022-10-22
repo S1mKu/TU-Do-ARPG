@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="raceline_service" name="raceline_service" type="raceline_server.py" output="screen"/>
+
+  <!-- Launch control_command_handle service -->
+  <node name="control_command_handle" pkg="control_command_handle" type="control_command_handle_node" output="screen">
+    <rosparam command="load" file="$(find control_command_handle)/config/control_command_handle.yaml" />
+  </node>
+
+  <!-- Launch pure_pursuit_service service -->
+  <node name="pure_pursuit_service" pkg="pure_pursuit_service" type="pure_pursuit_server" output="screen">
+  </node>
+
+  <!-- Launch gap_follower_service service -->
+  <node pkg="gap_follower_service" name="gap_follower_service" type="gap_follower_service_server.py" output="screen">
+  </node>
+
+</launch>

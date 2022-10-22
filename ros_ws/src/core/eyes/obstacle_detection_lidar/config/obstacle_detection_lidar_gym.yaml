@@ -1,0 +1,25 @@
+visualize: true
+
+# be careful with using leading slashes in topics since they declare a global 
+# namespace and in most cases we want to prepend the local namespace to distinguish the two racecars 
+topics:
+  subscribe:
+    map_topic: /map
+    scan_topic: lidar # /ego_racecar/lidar_scan
+  publish:
+    final_filtered_scan_topic: obstacle_detection/segments
+
+tf:
+  frames:
+    map_frame: /map
+    car_frame: /base_link
+    laser_frame: /laser_model
+
+algorithms:
+  bgs:
+    threshold: 0.1
+  abd: # adaptive breakpoint detection params
+    lambda: 7.0 # in degree - an acceptable angle for determining the points to be of the same cluster - see paper
+    short_range_increase_basis: 2.0 # mainly for gym - increase threshold for short range readings by 1/x formula 
+    short_range_increase_exp_bias: 4.0 # mainly for gym - increase threshold for short range readings by 1/x formula
+    lidar_standard_deviation: 0.03 # the standard deviation of the noise of the distance measure

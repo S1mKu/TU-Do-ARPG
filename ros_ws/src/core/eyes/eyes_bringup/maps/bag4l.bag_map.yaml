@@ -1,0 +1,6 @@
+image: /home/raphael/ARPG/artus/ros_ws/src/core/eyes/eyes_bringup/maps/bag4l.bag_map.pgm
+resolution: 0.050000
+origin: [-28.800000, -19.350000, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

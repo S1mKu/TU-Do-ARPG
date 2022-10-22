@@ -1,0 +1,104 @@
+#### Sensor's name #####
+imu_sensor_name: artus_MPU9250
+
+#### USB port #####
+serial_port: /dev/ttyACM3 #1
+  
+##### Calibration #### 
+## ~~ TODO: Currently Hardcoded in Arduino Firmware… ~~ ##
+## ~~ TODO: Test which cfg file works easiest and best…
+### --- accelerometer --- ###
+accOffset_x: -0.020649
+accOffset_y: -0.039069
+accOffset_z:  0.013311
+
+accGain_00:  0.99758
+accGain_01:  0.045014
+accGain_02: -0.025334
+
+accGain_10: -0.01319
+accGain_11:  0.99653
+accGain_12:  0.033928
+
+accGain_20:  0.080139
+accGain_21:  0.0037845
+accGain_22:  0.98521
+  
+### --- Gyroscope --- ###
+gyroOffset_x: -1.44449
+gyroOffset_y:  0.78518
+gyroOffset_z: -0.27658
+  
+### --- Magnetometer --- ###
+magOffset_x:  65.63
+magOffset_y: -17.57
+magOffset_z:  63.86
+
+magGain_00:  1.030
+magGain_01:  0.005
+magGain_02:  0.048
+
+magGain_10:  0.005
+magGain_11:  0.993
+magGain_12:  0.009
+
+magGain_20:  0.048
+magGain_21: -0.009
+magGain_22:  0.980
+
+##### Covariance Matrix ####
+  
+# Orientation covariance estimation:
+# Observed orientation noise: 0.3 degrees in x, y, 0.6 degrees in z
+# Magnetometer linearity: 0.1% of full scale (+/- 2 gauss) => 4 milligauss
+# Earth's magnetic field strength is ~0.5 gauss, so magnetometer nonlinearity could
+# cause ~0.8% yaw error (4mgauss/0.5 gauss = 0.008) => 2.8 degrees, or 0.050 radians
+# i.e. variance in yaw: 0.0025
+# Accelerometer non-linearity: 0.2% of 4G => 0.008G. This could cause
+# static roll/pitch error of 0.8%, owing to gravity orientation sensing
+# error => 2.8 degrees, or 0.05 radians. i.e. variance in roll/pitch: 0.0025
+# so set all covariances the same.
+orientation_cov_00:  0.0025
+orientation_cov_01:  0.0
+orientation_cov_02:  0.0
+
+orientation_cov_10:  0.0
+orientation_cov_11:  0.0025
+orientation_cov_12:  0.0
+
+orientation_cov_20:  0.0
+orientation_cov_21:  0.0
+orientation_cov_22:  0.0025
+
+
+# Angular velocity covariance estimation:
+# Observed gyro noise: 4 counts => 0.28 degrees/sec
+# nonlinearity spec: 0.2% of full scale => 8 degrees/sec = 0.14 rad/sec
+# Choosing the larger (0.14) as std dev, variance = 0.14^2 ~= 0.02
+angularVelocity_cov_00:  0.02
+angularVelocity_cov_01:  0.0
+angularVelocity_cov_02:  0.0
+
+angularVelocity_cov_10:  0.0
+angularVelocity_cov_11:  0.02
+angularVelocity_cov_12:  0.0
+
+angularVelocity_cov_20:  0.0
+angularVelocity_cov_21:  0.0
+angularVelocity_cov_22:  0.02
+
+# linear acceleration covariance estimation:
+# observed acceleration noise: 5 counts => 20milli-G's ~= 0.2m/s^2
+# nonliniarity spec: 0.5% of full scale => 0.2m/s^2
+# Choosing 0.2 as std dev, variance = 0.2^2 = 0.04
+linearAcc_cov_00:  0.04
+linearAcc_cov_01:  0.0
+linearAcc_cov_02:  0.0
+
+linearAcc_cov_10:  0.0
+linearAcc_cov_11:  0.04
+linearAcc_cov_12:  0.0
+
+linearAcc_cov_20:  0.0
+linearAcc_cov_21:  0.0
+linearAcc_cov_22:  0.04

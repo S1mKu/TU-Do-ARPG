@@ -1,0 +1,21 @@
+<launch>
+    <!-- <arg name="local_amcl" default="true"/>
+    <arg name="local_carto" default="false"/>
+
+    <!- - launch the localization using cartographer- ->
+    <group if="$(arg local_amcl)">
+        <!- - <arg name="map_file" default="$(find eyes_bringup)/maps/pace_lap.bag_map.yaml"/> - ->
+
+        <!- - <node name="map_server" pkg="map_server" type="map_server" args="$(find eyes_bringup)/maps/cropped.yaml 0.05" /> - ->
+        <node name="map_server" pkg="map_server" type="map_server" args="$(find eyes_bringup)/maps/pace_lap.bag_map.pgm 0.05" />
+        <!- - <node name="pose_setter" pkg="amcl" type="set_pose.py" args="18.950000 1.700000 0.0"/> - ->
+        <node name="pose_setter" pkg="amcl" type="set_pose.py" args="18.700000 1.800000 0.0"/>
+
+        <include file="$(find amcl)/launch/amcl.launch" />
+    </group>
+
+    <!- - launch the localization using amcl - ->
+    <group if="$(arg local_carto)">
+        <include file="$(find cartographer_setup)/launch/cartographer_localization.launch" />
+    </group> -->
+</launch>

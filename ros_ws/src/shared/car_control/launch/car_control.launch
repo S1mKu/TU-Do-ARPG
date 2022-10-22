@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+<!-- 
+Launches all necessary nodes that listen for drive_parameters and translate them to the car
+-->
+    <arg name="mode_override" default="0"/>
+    <arg name="dms_check_rate" default="20" /> <!-- in Hz -->
+    <arg name="dms_expiration" default="100" /> <!-- in ms -->
+    <arg name="emergencystop_expiration" default="3000" /> <!-- in ms -->
+	
+    <!-- car control node -->
+    <node
+      pkg="car_control"
+      type="car_controller"
+      name="car_controller"
+      output="screen"
+      required="true" />
+
+    <!-- dms control node -->
+    <node
+      pkg="car_control"
+      type="dms_controller"
+      name="dms_controller"
+      output="screen"
+      required="true" >
+      <param name="dms_check_rate" type="int" value = "$(arg dms_check_rate)" />
+      <param name="dms_expiration" type="int" value = "$(arg dms_expiration)" />
+      <param name="emergencystop_expiration" type="int" value = "$(arg emergencystop_expiration)" />
+      <param name="mode_override" type="int" value = "$(arg mode_override)" />
+    </node>
+
+    <!-- Drive Parameters Multiplexer node -->
+    <node
+      pkg="car_control"
+      type="drive_parameters_multiplexer"
+      name="drive_parameters_multiplexer"
+      output="screen"
+      required="true" />
+    
+    <node pkg="tf" type="static_transform_publisher" name="imu_to_base" args="0 0 0 0 0 0 base_link base_imu_link 10"/>	
+
+    <!-- Acceleration Controller node -->
+    <node
+      pkg="car_control"
+      type="acceleration_controller"
+      name="acceleration_controller"
+      output="screen"
+      required="true" />
+	
+</launch>

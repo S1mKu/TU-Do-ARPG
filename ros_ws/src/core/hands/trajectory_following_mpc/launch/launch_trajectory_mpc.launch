@@ -1,0 +1,3 @@
+<launch>
+    <node name="launch_trajectory_mpc" pkg="trajectory_following_mpc_python" type="trajectory_following_mpc_node.py" output="screen"/>
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+    <node name="start_mpc" pkg="time_optimal_do_mpc" type="time_optimal_do_mpc_node.py" output="screen"/>
+</launch>
+
+

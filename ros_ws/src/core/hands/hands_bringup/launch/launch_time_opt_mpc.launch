@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find time_optimal_mpc_python)/launch/start_mpc.launch"/>
+    
+</launch>

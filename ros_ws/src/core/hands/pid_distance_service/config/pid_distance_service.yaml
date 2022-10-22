@@ -1,0 +1,21 @@
+visualize: false
+
+topics:
+  publish:
+    error_topic: eval/error
+    output_topic: eval/output
+    distance_topic: eval/distance
+    set_point_topic: eval/set_point
+
+services:
+  advertise: pid_distance_velocity
+
+params:
+  k_p: 8
+  k_i: 0.07
+  k_d: 0.02
+  max_v: 20
+  min_v: -5
+  desired_time_delta: 0.5 # Desired distance in s to opponent. 0.5s at 4m/s => 2m desired distance
+  min_distance: 2       # Minimal distance in m to opponent.
+

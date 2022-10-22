@@ -1,0 +1,22 @@
+# Ignore virtualenv files
+venv/**/*
+ros_ws/build/*
+ros_ws/devel/*
+ros_ws/src/simulation/gazebo/*
+#ros_ws/src/simulation/gazebo/r*
+#ros_ws/src/simulation/gazebo/g*
+ros_ws/src/racer_system/external_packages/zed*
+ros_ws/src/simulation/f1tenth-*/pkg/*
+ros_ws/src/shared/de*
+ros_ws/src/shared/a*
+ros_ws/src/shared/c*
+ros_ws/src/shared/a*
+ros_ws/src/shared/e*
+ros_ws/src/shared/g*
+ros_ws/src/shared/t*
+
+
+ros_ws/src/core/eyes/grid_map_server/*
+ros_ws/src/core/eyes/localization/*
+
+

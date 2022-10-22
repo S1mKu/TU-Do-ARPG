@@ -1,0 +1,16 @@
+visualize: true
+
+topics:
+    subscribe:
+        final_filtered_scan_topic: obstacle_detection/segments
+    publish:
+        obstacle_topic: obstacle_tracking/obstacles
+
+tf:
+    frames:
+        world_frame: /map
+        car_frame: /laser_model
+
+algorithms:
+    data_association:
+        euclidean_distance_threshold: 0.03

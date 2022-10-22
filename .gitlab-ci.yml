@@ -1,0 +1,106 @@
+stages: 
+  - format
+  - build
+  - test
+  - consistency
+  - docs
+
+###################################################
+# Formatting                                      #
+###################################################
+
+format:python format:
+  image: ros:melodic
+  stage: format
+  needs: []
+  before_script: []
+  script:
+    - chmod +x ./scripts/format/install-formatting-tools.sh && ./scripts/format/install-formatting-tools.sh 
+    - ./scripts/ci-pipeline/check-format-python.sh
+  rules: 
+    - when: always
+    
+format:cpp format:
+  image: ros:melodic
+  stage: format
+  needs: []
+  before_script: []
+  script:
+    - chmod +x ./scripts/format/install-formatting-tools.sh && ./scripts/format/install-formatting-tools.sh 
+    - ./scripts/ci-pipeline/check-format-cpp.sh
+  rules: 
+    - when: always
+
+###################################################
+# ROS                                             #
+###################################################
+
+build:catkin build: 
+  image: registry.gitlab.fachschaften.org/f1tenth-ws21-22/integration/ci-container/ci-catkin-full:latest
+  stage: build
+  needs: []
+  before_script: []
+  cache:
+    paths:
+      - ccache/
+  script:
+    - chmod +x ./install_dependencies.sh && time ./install_dependencies.sh -g -y
+    - cd ros_ws && catkin_make 
+  rules: 
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+build:catkin test: 
+  image: registry.gitlab.fachschaften.org/f1tenth-ws21-22/integration/ci-container/ci-catkin-full:latest
+  stage: test
+  needs: ["build:catkin build"]
+  before_script: []
+  cache:
+    paths:
+      - ccache/
+  script:
+    - chmod +x ./install_dependencies.sh && time ./install_dependencies.sh -g -y
+    - cd ros_ws && catkin_make
+    - catkin_make run_tests && catkin_test_results
+  rules: 
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+###################################################
+# Consistency                                     #
+###################################################
+
+consistency:rosws consistency:
+  image: registry.gitlab.fachschaften.org/f1tenth-ws21-22/integration/ci-container/ci-catkin-full:latest
+  stage: consistency
+  needs: ["build:catkin build"]
+  before_script: []
+  script:
+    - chmod +x ./install_dependencies.sh && time ./install_dependencies.sh -g -y
+    - cd ros_ws && catkin_make
+    - ./../scripts/ci-pipeline/check-consistency.sh
+  rules: 
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+###################################################
+# Doxygen Documentation                           #
+###################################################
+
+pages:
+  image: alpine
+  stage: docs
+  before_script:
+    - apk update
+    - apk add doxygen
+    - apk add ttf-freefont graphviz
+  script:
+    - doxygen Doxyfile
+    - mv docs/html/ public/
+  artifacts:
+    paths:
+      - public
+  #Pipeline should be triggered manually for now
+  #rules:
+  #  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+

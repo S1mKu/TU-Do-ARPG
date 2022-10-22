@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="world" default="racetrack_decorated_2"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="debug" default="false"/>
+    <arg name="verbose" default="true"/>
+    <arg name="use_gpu" default="true"/>
+    <arg name="joystick_type" default="xbox360"/>
+    <arg name="visualize_lidar" default="false"/>
+    <arg name="emergency_stop" default="true"/>
+    <arg name="record" default="false"/>
+    <arg name="videohd" default="false"/>
+    <arg name="race_settings" default="false"/>
+    <arg name="pace_lap" default="false"/>
+
+    <!-- Mode Override
+        1 forces manual driving
+        2 forces autonomous driving
+        0 uses user input to enable the modes
+    -->
+    <arg name="mode_override" default="0"/>
+
+    <param name="world_name" value="$(arg world)"/>
+
+    <include file="$(find hands_bringup)/launch/legacy.launch" />
+
+    <include file="$(find car_control)/launch/car_control.launch">
+        <arg name="mode_override" value="$(arg mode_override)"/>
+    </include>
+    
+    <include file="$(find teleoperation)/launch/remote_control.launch">
+        <arg name="joystick_type" value="$(arg joystick_type)"/>
+    </include>
+
+    <!-- transform laserscan to cartesian -->
+    <include file="$(find car_tf)/launch/car_transformer.launch" />
+
+    <!--<include file="$(find imu_velocity)/launch/car_imu_velocity.launch" />-->
+
+    <include file="$(find car_tf)/launch/car_transformer.launch">
+        <arg name="topic_input" value="/scan_camera" />
+        <arg name="topic_output" value="/scan/cam/cartesian" />
+    </include>
+
+    <group if="$(arg emergency_stop)">
+        <include file="$(find emergency_stop)/launch/emergency_stop.launch"/>
+    </group>
+
+    <group if="$(arg race_settings)">
+        <include file="$(find eyes_bringup)/launch/localization.launch" />
+    </group>
+
+    <group if="$(arg pace_lap)">
+        <include file="$(find eyes_bringup)/launch/pace_lap.launch" />
+    </group>
+
+    <!-- Include racer with 720p camera -->
+    <group if="$(arg videohd)">
+        <include file="$(find racer_world)/launch/racer_gazebo_720.launch">
+            <arg name="world" value="$(arg world)"/>
+            <arg name="paused" value="$(arg paused)"/>
+            <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+            <arg name="gui" value="$(arg gui)"/>
+            <arg name="debug" value="$(arg debug)"/>
+            <arg name="verbose" value="$(arg verbose)"/>
+            <arg name="use_gpu" value="$(arg use_gpu)"/>
+            <arg name="visualize_lidar" value="$(arg visualize_lidar)"/>
+        </include>
+    </group>
+
+    <!-- Include racer with VGA camera -->
+    <group unless="$(arg videohd)">
+        <include file="$(find racer_world)/launch/racer_gazebo.launch">
+            <arg name="world" value="$(arg world)"/>
+            <arg name="paused" value="$(arg paused)"/>
+            <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+            <arg name="gui" value="$(arg gui)"/>
+            <arg name="debug" value="$(arg debug)"/>
+            <arg name="verbose" value="$(arg verbose)"/>
+            <arg name="use_gpu" value="$(arg use_gpu)"/>
+            <arg name="visualize_lidar" value="$(arg visualize_lidar)"/>
+        </include>
+    </group>
+
+    <include file="$(find vesc_sim)/launch/vesc_sim.launch"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="depth_rotation" args="0.18 0 0.14 -1.570796327 0 -1.570796327 /base_link /camera 10" />
+
+    <node pkg="car_config" type="dynamic_physical_properties" name="dynamic_physical_properties" respawn="true" output="screen"/>
+
+    <node name="lap_timer" pkg="simulation_tools" type="lap_timer.py" output="screen"/>
+    <node pkg="gazebo_telemetry" type="gazebo_state_telemetry.py" name="gazebo_state_telemetry" respawn="true" output="screen"/>
+
+    <node pkg="simulation_tools" type="crash_detector" name="crash_detector" output="screen" />
+
+    <!-- publishes the approximated maximal possible speed for a certain position on the track -->
+    <node pkg="analysis-tools" type="speed_info" name="speed_info" respawn="true" output="screen"/>
+    
+    <!-- needed for logging telemetry data and provide node for rviz -->
+    <!-- prefix: log prefix (string), default: none -->
+    <!-- length: length for min/max arrays (int), default: 100 -->
+    <!-- smooth: smoothing value of acceleration (int), default: 5 -->
+    <!-- sim: whether its simulation or not (bool), default: false -->
+    <!-- write: whether write statistics or not (bool), default: false -->
+    <node pkg="analysis-tools" type="log_stats" name="log_stats" respawn="true" output="screen">
+        <param name="prefix" value="gazebo" />
+        <param name="length" value="100" />
+        <param name="smooth" value="10" />
+        <param name="sim" value="true" />
+        <param name="write" value="true" />
+    </node>
+    
+    <group if="$(arg record)">
+        <node pkg="image_view" type="video_recorder" name="video_record_cam">
+            <remap from="image" to="/racer/camera1/image_raw"/>
+            <param name="fps" value="30" />
+            <param name="filename" value="output-cam.avi" />
+        </node>        
+    </group>
+    
+    <!-- default rviz config -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find racer_world)/launch/rviz_config.rviz"/>
+</launch>

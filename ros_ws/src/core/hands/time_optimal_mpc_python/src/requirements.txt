@@ -1,0 +1,6 @@
+casadi==3.5.5.post2
+matplotlib==3.5.2
+numpy==1.21.6
+scipy==1.8.0
+Shapely==1.8.2
+tf==1.0.0

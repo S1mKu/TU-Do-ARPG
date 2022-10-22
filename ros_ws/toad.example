@@ -1,0 +1,122 @@
+#!/bin/bash
+# super sophisticated control script for nearly everything - settings
+# written by Marcel Ebbrecht <marcel.ebbrecht@googlemail.com>
+
+### IMPORTANT: Copy to toad.settings, configure and set CONFIGURED to 1 ###
+
+# preamble
+LANG=C
+PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
+# settings
+# branch for system
+BRANCHBUILD="development"
+
+# branch for ssh keys
+BRANCHSSH="master"
+
+# branch for car
+BRANCHCAR="master"
+
+# launchfile for simulation
+LAUNCHBUILD="gazebo.launch"
+
+# launchfile for car
+LAUNCHCAR="car_wallfollowing.launch"
+
+# IMPORTANT: IF YOU'RE INSANE, SET THIS TO 1, THIS WILL ENABLE 
+# THE POSSIBILITY TO START THE CAR IN AUTONOMOUS MODE DIRECTLY
+LAUNCHCARINSANE="0"
+
+# custom racetrack
+# - racecar
+# - racecar_cones
+# - racecar_parking_1
+# - racecar_tunnel
+# - racetrack
+# - racetrack_decorated
+# - racetrack_decorated_2
+# - racetrack_decorated_2_big
+# - racetrack_obstacle
+# - track_barca
+# - track_levine
+# - track_porto
+# - walker_racecourse
+LAUNCHTRACK="racetrack_decorated_2"
+
+# path for ros to source
+PATHROS="/opt/ros/melodic/setup.bash"
+
+# path for bash setup to source
+PATHSETUP="./devel/setup.bash"
+
+# use gpu for lidar (true|false)
+USEGPU="false"
+
+# IP address of car for remote rviz
+CARIP="192.168.42.10"
+
+# Car data directory as /pathtodatafolder
+CARDATA="/home/arpg/ar-tu-do/data/"
+
+# Car SSH User
+CARUSER="arpg"
+
+# main network interface of the car, used for determining address
+CARINTERFACE="wlan0"
+
+# set to 1 after configuring
+CONFIGURED="0"
+
+# settings for video conversion
+VIDEOSDIR="../data/videos"
+
+# factor on camera speed for video conversion
+# juest guess ;) Mostly around 6...
+VIDEOCAMFACTOR="6"
+
+# overlay image for video
+VIDEOLOGO="./src/simulation/racer_world/launch/logo_trans.png"
+
+# enable creation of gifs
+VIDEOGIFENABLE="false"
+
+# horizontal size for gifs
+VIDEOGIFSIZE="480"
+
+# fps for gifs
+VIDEOGIFFPS="10"
+
+# settings for latex telemetry report
+REPORTCONFIGURED="0"
+# normally no change needed
+REPORTDIR="../data/reports"
+# normally no change needed
+REPORTDATADIR="../data/telemetry"
+# normally no change needed
+REPORTTEMPLATES="../templates/tex"
+# Provide data files seperated by spaces or linebreaks
+# Format: FILE;COLOR;TITLE;DESCR
+#     FILE  Filename to include
+#     COLOR red,blue,green,yellow,black,purple or anything, that latex supports
+#     TITLE Title to use in legend (use _ as spaces)
+#     DESCR Description used in Captions and TOCs (use _ as spaces)
+REPORTDATAFILES="
+gazebo_20200517-wf2/speed_over_time.dat;blue;WF2;Wallfollowing_2_(alte_Version)
+gazebo_20200517-wf5/speed_over_time.dat;green;WF5;Wallfollowing_5_(aktuelle_Entwicklungsversion)
+"
+#sim-current-20200515/speed_over_time.dat;green;WF5;Wallfollowing_5_(aktuelle_Entwicklungsversion)
+#sim-old-20200515/speed_over_time.dat;blue;WF2;Wallfollowing_2_(alte_Version)
+
+# Timesets to use for plots seperated by spaces or linebreaks
+# Please ensure, that the data files hold enough datasets
+# Format: COUNT;DIVT;DIVD
+#     COUNT Number of datasets to use on Plots
+#     DIVT  Steps for plots by time
+#     DIVD  Steps for plots by distance
+#2000;20;100;20
+#1000;10;50;10
+REPORTSETS="
+500;5;25;5
+200;2;10;2
+"

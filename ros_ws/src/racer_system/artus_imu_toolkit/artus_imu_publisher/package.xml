@@ -1,0 +1,39 @@
+<package>
+    <name>artus_imu_publisher</name>
+    <version>0.0.0</version>
+    <description>
+        artus_imu_publisher is a package that provides a
+        translation interface for IMU Data provided by  a MCU
+        with an IMU-Sensor Modules over Serial(-Over-USB) to ROS'
+        Messaging/Topic System.
+    </description>
+
+    <url type="repository">https://gitlab.fachschaften.org/f1tenth-ws21-22/artus</url>
+    <url type="website">https://learn.adafruit.com/adafruit-sensorlab-magnetometer-calibration?view=all</url>
+    <url type="website">https://www.pjrc.com/store/prop_shield.html</url>
+    <url type="website">https://learn.sparkfun.com/tutorials/9dof-razor-imu-m0-hookup-guide</url>
+
+    <!-- Maintainer -->
+    <maintainer email="f110@ls12.cs.uni-dortmund.de">PG F1/10</maintainer>
+    <maintainer email="samanta.scharmacher@tu-dortmund.de">Samanta Scharmacher</maintainer>
+
+    <!-- License -->
+    <license>BSD</license>
+
+    <author>Samanta Scharmacher</author>
+
+    <!-- Dependencies -->
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>dynamic_reconfigure</build_depend>
+
+    <run_depend>rospy</run_depend>
+    <run_depend>tf</run_depend>
+    <run_depend>sensor_msgs</run_depend>
+    <run_depend>geometry_msgs</run_depend>
+    <run_depend>python-serial</run_depend>
+    <run_depend>dynamic_reconfigure</run_depend>
+
+</package>
+
+

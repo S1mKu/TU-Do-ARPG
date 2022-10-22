@@ -1,0 +1,6 @@
+<launch>
+  <arg name="9DOF_Razor_M0_config_file" default="$(find artus_imu_publisher)/config/artus_9DOF_Razor_M0_config.yaml"/>
+  <node pkg="artus_imu_publisher" type="artus_imu_9DOF_Razor_M0_publisher.py" name="artus_imu_9DOF_Razor_M0_pub_py_node" output="screen">
+    <rosparam file="$(arg 9DOF_Razor_M0_config_file)" command="load"/>
+  </node>
+</launch>

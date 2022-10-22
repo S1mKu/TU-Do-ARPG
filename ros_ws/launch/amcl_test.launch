@@ -1,0 +1,21 @@
+<launch>
+
+    <arg name="map_map_server" default="SOCHI.yaml"/>
+  
+    <!-- Launch a map from the maps folder & map server-->
+    <arg name="map" default="$(find f1tenth_gym_ros)/maps/$(arg map_map_server)"/>
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)"/>
+
+
+    <node pkg="tf" type="static_transform_publisher" name="depth_rotation" args="0.18 0 0.14 -1.570796327 0 -1.570796327 ego_racecar/base_link odom 10" /> 
+   
+    <!--<node name="rviz" pkg="rviz" type="rviz" />-->
+
+
+    <include file="$(find eyes_bringup)/launch/amcl.launch" />
+
+    <node pkg="urg_node" type="urg_node" name="urg_node">
+        <param name="ip_address" value="192.168.1.10"/>
+    </node>
+
+</launch>

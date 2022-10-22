@@ -1,0 +1,4 @@
+std_msgs/Float32 distance # distance to opponent in m
+std_msgs/Float32 velocity # opponent velocity in m/s 
+---
+std_msgs/Float32 velocity 

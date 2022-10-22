@@ -1,0 +1,34 @@
+visualize: false
+
+topics:
+  subscribe:
+    obstacle_topic: scan/final
+    pose_topic: pose
+    odom_topic: odom
+    scan_topic: scan
+    opp_trajectory_topic: opponent_trajectory
+  publish:
+    pp_topic: input/drive_param/autonomous
+
+services:
+  gap_follower_service: calculate_commands
+  pure_pursuit_service: pure_pursuit_control_command
+  stanley_controller_service: stanley_controller_control_command
+  centerline_service: /get_centerline
+  opp_traj_service: opp_traj_control_command
+  pid_distance_service: pid_distance_velocity
+
+params:
+  speed: 10.0
+  speed_mod: 0.5
+  crossover: 20
+  use_stanley: true
+  rate: 200
+  # Modifier for gap following algorithm speed 
+  # -> Slow down or speed up; Take speed without change = 1
+
+
+tf:
+  frames:
+    map_frame: /map
+    car_frame: /base_link

@@ -1,0 +1,7 @@
+---
+geometry_msgs/PolygonStamped raceline
+float32[] s
+float32[] psi
+float32[] kappa
+float32[] velocity
+float32[] acceleration

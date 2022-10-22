@@ -1,0 +1,7 @@
+geometry_msgs/PolygonStamped trajectory
+geometry_msgs/PoseWithCovarianceStamped pose
+std_msgs/Float32 old_angle
+std_msgs/Float32 target_velocity
+---
+std_msgs/Float32  steering_angle
+std_msgs/Float32  speed

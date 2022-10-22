@@ -1,0 +1,22 @@
+visualize: true
+
+topics:
+  publish:
+    viz_look_ahead_topic: rviz/look_ahead
+    viz_followed_path_topic: rviz/followed_path
+    cte_topic: eval/cte
+
+services:
+  advertise: pure_pursuit_control_command
+
+params:
+  car_length: 0.31
+  max_look_ahead: 8.0
+  min_look_ahead: 1.5
+  desired_time_delta: 0.4
+  shift_rear_point: 0.3
+
+tf:
+  frames:
+    map_frame: /map
+    car_frame: /base_link

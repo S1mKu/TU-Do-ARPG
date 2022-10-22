@@ -1,0 +1,3 @@
+geometry_msgs/PolygonStamped trajectory
+std_msgs/Float32 distance
+std_msgs/Float32 velocity

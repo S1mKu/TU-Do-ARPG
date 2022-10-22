@@ -1,0 +1,5 @@
+<launch>
+  <node name="control_command_handle" pkg="control_command_handle" type="control_command_handle_node">
+    <rosparam command="load" file="$(find control_command_handle)/config/control_command_handle.yaml" />
+  </node>
+</launch>

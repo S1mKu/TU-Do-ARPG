@@ -1,0 +1,6 @@
+<launch>
+  <arg name="MPU9250_config_file" default="$(find artus_imu_publisher)/config/artus_MPU9250_config.yaml"/>
+  <node pkg="artus_imu_publisher" type="artus_imu_MPU9250_publisher.py" name="artus_imu_MPU9250_pub_py_node" output="screen">
+    <rosparam file="$(arg MPU9250_config_file)" command="load"/>
+  </node>
+</launch>

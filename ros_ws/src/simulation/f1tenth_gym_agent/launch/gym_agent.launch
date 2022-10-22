@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="f1tenth_gym_agent" required="true" type="agent_bridge.py" name="gym_agent_test" output="screen"/>
+</launch>

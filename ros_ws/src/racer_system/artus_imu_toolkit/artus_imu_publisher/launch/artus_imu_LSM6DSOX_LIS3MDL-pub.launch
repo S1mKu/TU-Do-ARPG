@@ -1,0 +1,6 @@
+<launch>
+  <arg name="LSM6DSOX_LIS3MDL_config_file" default="$(find artus_imu_publisher)/config/artus_LSM6DSOX_LIS3MDL_config.yaml"/>
+  <node pkg="artus_imu_publisher" type="artus_imu_LSM6DSOX_LIS3MDL_publisher.py" name="artus_imu_LSM6DSOX_LIS3MDL_pub_py_node" output="screen">
+    <rosparam file="$(arg LSM6DSOX_LIS3MDL_config_file)" command="load"/>
+  </node>
+</launch>

@@ -1,0 +1,26 @@
+digraph G {
+"opp_racecar/base_link" -> "opp_racecar/back_left_wheel"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"opp_racecar/odom" -> "opp_racecar/base_link"[label="Broadcaster: /gym_agent\nAverage rate: 228.598 Hz\nMost recent transform: 1658328401.378 ( 0.010 sec old)\nBuffer length: 4.934 sec\n"];
+"opp_racecar/base_link" -> "opp_racecar/back_right_wheel"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"opp_racecar/base_link" -> "opp_racecar/front_left_hinge"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"opp_racecar/base_link" -> "opp_racecar/front_right_hinge"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"opp_racecar/base_link" -> "opp_racecar/laser_model"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/base_link" -> "ego_racecar/back_left_wheel"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/odom" -> "ego_racecar/base_link"[label="Broadcaster: /gym_agent\nAverage rate: 233.847 Hz\nMost recent transform: 1658328401.370 ( 0.019 sec old)\nBuffer length: 4.913 sec\n"];
+"ego_racecar/base_link" -> "ego_racecar/back_right_wheel"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/base_link" -> "ego_racecar/front_left_hinge"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/base_link" -> "ego_racecar/front_right_hinge"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/base_link" -> "ego_racecar/laser_model"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1658328401.388 sec old)\nBuffer length: 0.000 sec\n"];
+"ego_racecar/front_left_hinge" -> "ego_racecar/front_left_wheel"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1658328401.319 ( 0.069 sec old)\nBuffer length: 4.800 sec\n"];
+"ego_racecar/front_right_hinge" -> "ego_racecar/front_right_wheel"[label="Broadcaster: /ego_racecar/robot_state_publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1658328401.319 ( 0.069 sec old)\nBuffer length: 4.800 sec\n"];
+"opp_racecar/front_left_hinge" -> "opp_racecar/front_left_wheel"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1658328401.322 ( 0.066 sec old)\nBuffer length: 4.800 sec\n"];
+"opp_racecar/front_right_hinge" -> "opp_racecar/front_right_wheel"[label="Broadcaster: /opp_racecar/robot_state_publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1658328401.322 ( 0.066 sec old)\nBuffer length: 4.800 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1658328401.388"[ shape=plaintext ] ;
+ }->"opp_racecar/odom";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1658328401.388"[ shape=plaintext ] ;
+ }->"ego_racecar/odom";
+}
