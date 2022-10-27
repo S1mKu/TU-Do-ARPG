@@ -19,6 +19,10 @@ See the [wiki page](https://github.com/arpg-sophisticated/ar-tu-do/wiki) of the 
 
 See install_dependencies.sh and install all remaining dependencies with 'sudo apt-get install ros-melodic-[DEPENDENCY]`. 
 
+```bash
+./install_dependencies.sh
+```
+
 ## Running it
 
 Navigate to the workspace of the project and remove the old build directory for a clean build:
