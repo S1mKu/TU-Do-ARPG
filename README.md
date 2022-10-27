@@ -9,7 +9,7 @@ This repository contains software for 1/10th scale autonomous race cars to compe
 
 ## Requirements
 
-ROS Melodic (TODO: upgrade)
+ROS [__Melodic__](http://wiki.ros.org/melodic/Installation)
 Ubuntu 18.04 (upgrade with ROS upgrade)
 
 This repository also includes source code for the Gazebo simulation environment. However, it is currently not in use. We keep it just in case someone wants to adopt it.
@@ -18,6 +18,10 @@ See the [wiki page](https://github.com/arpg-sophisticated/ar-tu-do/wiki) of the 
 ## Installation
 
 See install_dependencies.sh and install all remaining dependencies with 'sudo apt-get install ros-melodic-[DEPENDENCY]`. 
+
+```bash
+./install_dependencies.sh
+```
 
 ## Running it
 
