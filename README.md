@@ -9,7 +9,7 @@ This repository contains software for 1/10th scale autonomous race cars to compe
 
 ## Requirements
 
-ROS Melodic (TODO: upgrade)
+ROS [__Melodic__](http://wiki.ros.org/melodic/Installation)
 Ubuntu 18.04 (upgrade with ROS upgrade)
 
 This repository also includes source code for the Gazebo simulation environment. However, it is currently not in use. We keep it just in case someone wants to adopt it.
